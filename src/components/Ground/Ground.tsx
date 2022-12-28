@@ -3,8 +3,8 @@ import { FC } from "react";
 
 const Ground: FC = () => {
   const [ref] = usePlane(() => ({
-    rotation: [0,0,0],
-    position: [0,0,0]
+    rotation: [- Math.PI/ 2,0,0], //plane in xyz
+    position: [0,-0.5,0]
   })) 
   return (
     <mesh ref={ref}>

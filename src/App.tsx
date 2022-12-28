@@ -5,6 +5,7 @@ import { Physics } from '@react-three/cannon';
 
 import './App.css';
 import Ground from './components/Ground/Ground';
+import Perspective from './components/Perspective/Perspective';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <Canvas>
         <Sky sunPosition={[100,100,20]} />
         <ambientLight intensity={0.5} />
+        <Perspective />
         <Physics>
           <Ground />
         </Physics>
