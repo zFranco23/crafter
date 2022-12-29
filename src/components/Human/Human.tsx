@@ -3,9 +3,13 @@ import { useSphere } from "@react-three/cannon";
 import { useFrame, useThree } from "@react-three/fiber"
 import { FC, useEffect, useRef } from "react"
 import { Vector3 } from "three";
+import { useKeyboardAction } from "../../utils/keyboard";
 
 
 const Human: FC = () => {
+  const actions = useKeyboardAction();
+  console.log(actions);
+  
   const { camera } = useThree();
   const [ref,api ] = useSphere(() => ({
     mass: 1,
