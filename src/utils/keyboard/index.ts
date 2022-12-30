@@ -1,13 +1,15 @@
 import { useCallback, useEffect, useState } from "react"
 
-type KeyboardActionMap = {
-    [key: string] : string
-}
 
-type SingleKeyboardAction = 'moveForward' | 'moveBackward' | 'moveLeft' | 'moveRight'
+
+type SingleKeyboardAction = 'moveForward' | 'moveBackward' | 'moveLeft' | 'moveRight' | 'jump'
 
 type KeyboardActions = {
     [key in SingleKeyboardAction] : boolean;
+}
+
+type KeyboardActionMap = {
+    [key: string] : SingleKeyboardAction
 }
 
 const KEYBOARD_ACTIONS_MAP: KeyboardActionMap = {
@@ -15,6 +17,7 @@ const KEYBOARD_ACTIONS_MAP: KeyboardActionMap = {
     KeyS : 'moveBackward',
     KeyA : 'moveLeft',
     KeyD : 'moveRight',
+    Space: 'jump',
 }
 
 
@@ -30,16 +33,18 @@ export const useKeyboardAction = () => {
         moveForward: false,
         moveBackward: false,
         moveLeft: false,
-        moveRight: false
+        moveRight: false,
+        jump: false,
     })
 
     const onKeyPressed = useCallback((event: KeyboardEvent, toggle : boolean)=>{
         const { code } = event;
+        console.log(code);
+        
         if(KEYBOARD_ACTIONS_MAP[code]) {
             const action = KEYBOARD_ACTIONS_MAP[code];
             const flag = toggle ? !!keyboardActions[action] : !keyboardActions[action];
             if(flag) return;
-            console.log('hola');
             setKeyboardActions( prev => ({...prev, [action] : toggle }))
         }
     },[keyboardActions])

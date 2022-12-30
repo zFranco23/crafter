@@ -8,8 +8,12 @@ import Perspective from './components/Perspective/Perspective';
 import Human from './components/Human/Human';
 
 import './App.css';
+import Cubes from './components/Cubes/Cubes';
+import { useStore } from './utils/state';
 
 const App = () => {
+
+  const selectedCubeId = useStore(state => state.selectedCubeId); 
   return (
     <div className="app__container">
       <Canvas>
@@ -19,8 +23,10 @@ const App = () => {
         <Physics>
           <Human />
           <Ground />
+          <Cubes />
         </Physics>
       </Canvas>
+      <div className='pointer'> {selectedCubeId ? 'x' : '+'} </div>
     </div>
   )
 }

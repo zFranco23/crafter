@@ -6,9 +6,17 @@ import { Vector3 } from "three";
 import { useKeyboardAction } from "../../utils/keyboard";
 
 
+const SPEED = 4;
+const JUMP_STRENGHT = 4; 
+
 const Human: FC = () => {
-  const actions = useKeyboardAction();
-  console.log(actions);
+  const {
+    moveForward,
+    moveBackward,
+    moveLeft,
+    moveRight,
+    jump,
+  } = useKeyboardAction();
   
   const { camera } = useThree();
   const [ref,api ] = useSphere(() => ({
@@ -40,13 +48,28 @@ const Human: FC = () => {
         )
     )
 
-    api.velocity.set(0, 0, -1)
+    //Update velocity depending of action
+
+    const direction = new Vector3();
+    //x = 0, y = 0, z = forward ? -1 : backward ? 1  :0  
+    const ZVector = new Vector3(0, 0, (moveBackward ? 1 : 0) - (moveForward ? 1 : 0));
+    const XVector = new Vector3((moveLeft ? 1 : 0) - (moveRight ? 1 : 0), 0, 0);
+
+    direction
+      .subVectors(ZVector,XVector)
+      .normalize()
+      .multiplyScalar(SPEED)
+      .applyEuler(camera.rotation) // to follow camera rotation 
+
+    api.velocity.set(direction.x, vel.current[1], direction.z)
+
+    if(jump && Math.abs(vel.current[1]) < 0.05){
+      api.velocity.set(vel.current[0], JUMP_STRENGHT, vel.current[1])
+    }
   })
 
   return (
-    <mesh ref={ref}>
-
-    </mesh>
+    <mesh ref={ref} />
   )
 }
 
