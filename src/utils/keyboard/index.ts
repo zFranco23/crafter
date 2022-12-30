@@ -39,8 +39,7 @@ export const useKeyboardAction = () => {
 
     const onKeyPressed = useCallback((event: KeyboardEvent, toggle : boolean)=>{
         const { code } = event;
-        console.log(code);
-        
+    
         if(KEYBOARD_ACTIONS_MAP[code]) {
             const action = KEYBOARD_ACTIONS_MAP[code];
             const flag = toggle ? !!keyboardActions[action] : !keyboardActions[action];

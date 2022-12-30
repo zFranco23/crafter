@@ -35,7 +35,7 @@ const Cube: FC<Props> = ({ id, texture, position }) => {
     if(event.ctrlKey || event.altKey) removeCube(id);
   }
 
-  const onPointerEnter = (event: ThreeEvent<PointerEvent>) => {
+  const onPointerMove = (event: ThreeEvent<PointerEvent>) => {
     event.stopPropagation();
     updateSelectedCube(id);
   }
@@ -46,8 +46,8 @@ const Cube: FC<Props> = ({ id, texture, position }) => {
   }
 
   return (
-    <mesh
-      onPointerEnter={onPointerEnter}
+    <mesh 
+      onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
       onClick={handleDeleteCube}
       ref={ref} 
