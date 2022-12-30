@@ -10,6 +10,7 @@ export type RootState = {
     addCube: (position: Position) => void,
     removeCube: (id: string) => void,
     updateSelectedCube: (selectedCubeId: string) => void,
+    setTexture: (texture: Texture) => void,
 }
 
 export const useStore = create<RootState>((set: SetState<RootState>) => ({
@@ -49,7 +50,11 @@ export const useStore = create<RootState>((set: SetState<RootState>) => ({
             selectedCubeId: !!selectedCubeId ? selectedCubeId : undefined
         }))
     },
-    setTexture: () => {},
+    setTexture: (texture: Texture) => {
+        set(state => ({
+            currentTexture: texture
+        }))
+    },
     saveWorld: () => {},
     resetWorld: () => {},
 }))

@@ -7,6 +7,22 @@ import {
     wood 
 } from './img';
 
+import type { Texture as TextureType } from '../types';
+
+
+export const 
+  mapTexturesArray: {
+    label: TextureType,
+    img: string,
+}[] = [ 
+    { label: 'grass', img : grass  },
+    { label: 'glass', img: glass  },
+    { label: 'dirt', img: dirt  },
+    { label: 'log', img: log  },
+    { label: 'wood', img: wood  },
+]
+
+//Textures 
 const groundTexture: Texture = new TextureLoader().load(grass);
 const glassTexture: Texture = new TextureLoader().load(glass);
 const dirtTexture: Texture = new TextureLoader().load(dirt);
